@@ -20,6 +20,7 @@ end
 -- 設定ファイルを読み込む
 -------------------------------------------------
 local core_conf_files = {
+  "options.lua",
   "keybinds.lua", 
   "plugins.lua",
 }
