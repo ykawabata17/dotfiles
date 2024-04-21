@@ -1,6 +1,6 @@
 return {
   "goolord/alpha-nvim",
-  event = "VimEnter",
+  event = "VimEnter", -- 起動時に発火してほしいからこれを入れる
   config = function()
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
