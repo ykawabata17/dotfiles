@@ -20,9 +20,8 @@ end
 -- 設定ファイルを読み込む
 -------------------------------------------------
 local core_conf_files = {
-  "options.lua",
-  "keybinds.lua", 
-  "plugins.lua",
+  "relu.core.lua",
+  "relu.lazy.lua",
 }
 
 for _, file_name in ipairs(core_conf_files) do
