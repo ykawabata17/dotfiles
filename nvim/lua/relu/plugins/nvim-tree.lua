@@ -8,6 +8,7 @@ return {
 
     require("nvim-tree").setup({
       view = {
+        side = 'right',
         width = 40,
       },
       renderer = {
@@ -21,6 +22,11 @@ return {
             folder = {
               arrow_closed = "⇨",
               arrow_open = "⇩",
+            },
+            git = {
+              unstaged = '!',
+              untracked = '?',
+              staged = '✔︎',
             },
           },
         },
@@ -49,3 +55,4 @@ return {
     map("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
   end
 }
+
