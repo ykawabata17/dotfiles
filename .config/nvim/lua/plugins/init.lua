@@ -52,7 +52,6 @@ require("lazy").setup({
   { import = "plugins.hlchunk" },     -- インデント表示
   { import = "plugins.neo-tree" },    -- ファイルエクスプローラー
   { import = "plugins.telescope" },   -- ファジーファインダー
-  { import = "plugins.project" },     -- プロジェクト管理
   { import = "plugins.cmp" },         -- 補完エンジン
   { import = "plugins.copilot" },     -- GitHub Copilot
   { import = "plugins.autopairs" },   -- 自動括弧閉じ
@@ -62,7 +61,6 @@ require("lazy").setup({
   { import = "plugins.mason" },       -- LSPインストーラー
   { import = "plugins.lspconfig" },   -- LSP設定
   { import = "plugins.treesitter" },  -- 構文解析
-  { import = "plugins.trouble" },     -- 診断リスト表示
   { import = "plugins.conform" },     -- フォーマッター
   { import = "plugins.lint" },        -- リンター
   { import = "plugins.gitsigns" },    -- Git統合

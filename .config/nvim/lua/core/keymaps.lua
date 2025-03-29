@@ -11,12 +11,6 @@ keymap("n", "<C-j>", "<C-w>j", opts) -- 下のウィンドウへ
 keymap("n", "<C-k>", "<C-w>k", opts) -- 上のウィンドウへ
 keymap("n", "<C-l>", "<C-w>l", opts) -- 右のウィンドウへ
 
--- ウィンドウサイズ調整
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-
 -- バッファ操作
 keymap("n", "<S-l>", ":bnext<CR>", opts)       -- 次のバッファへ
 keymap("n", "<S-h>", ":bprevious<CR>", opts)   -- 前のバッファへ
@@ -30,19 +24,10 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 keymap("v", "<C-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 
--- 貼り付け時に選択範囲を上書きしても、レジスタを上書きしない
-keymap("v", "p", '"_dP', opts)
-
 -- 検索関連
 keymap("n", "<leader>h", ":nohlsearch<CR>", opts) -- ハイライト解除
 keymap("n", "n", "nzzzv", opts)                   -- 検索結果の次へ (中央表示)
 keymap("n", "N", "Nzzzv", opts)                   -- 検索結果の前へ (中央表示)
-
--- VSCodeライクなコマンド
-keymap("n", "<C-s>", ":w<CR>", opts)                                                    -- 保存
-keymap("i", "<C-s>", "<Esc>:w<CR>a", opts)                                              -- 挿入モードでの保存
-keymap("n", "<C-q>", ":q<CR>", opts)                                                    -- 終了
-keymap("n", "<C-/>", ":lua require('Comment.api').toggle.linewise.current()<CR>", opts) -- コメントトグル
 
 -- ファイルエクスプローラー (Neo-tree)
 keymap("n", "<C-b>", ":Neotree toggle<CR>", opts)    -- サイドバートグル (VSCodeのエクスプローラー)

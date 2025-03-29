@@ -19,6 +19,7 @@ opt.cursorline = true
 -- インデント設定
 opt.tabstop = 2
 opt.shiftwidth = 2
+opt.softtabstop = 2
 opt.expandtab = true
 opt.autoindent = true
 opt.smartindent = true
@@ -54,21 +55,14 @@ opt.splitright = true
 -- その他
 opt.updatetime = 100
 opt.timeoutlen = 300
-opt.completeopt = { "menuone", "noselect" }
 opt.conceallevel = 0
 opt.pumheight = 10
 opt.showtabline = 2
 opt.mouse = "a"
-
--- 不可視文字の表示
-opt.list = true
-opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-
--- コマンドライン高さ
-opt.cmdheight = 1
 
 -- 折りたたみ設定
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false
 opt.foldlevel = 99
+opt.foldlevelstart = 99
