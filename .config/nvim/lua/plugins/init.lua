@@ -46,12 +46,42 @@ require("lazy").setup({
     end,
   },
 
-  { 'echasnovski/mini.icons',      version = false },
-
-  -- JSON Schema Store
   {
-    "b0o/schemastore.nvim",
-    lazy = true,
+    "github/copilot.vim",
+    lazy = false,
+  },
+
+  {
+    "slim-template/vim-slim",
+    lazy = false,
+  },
+
+  {
+    "tpope/vim-rails",
+    lazy = false,
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    lazy = false,
+    config = function()
+      require("gitsigns").setup {
+        current_line_blame = true,
+      }
+    end,
+  },
+
+  { "sindrets/diffview.nvim",      lazy = false },
+
+  {
+    "mogulla3/rspec.nvim",
+    lazy = false,
+    config = function()
+      require("rspec").setup {
+        -- Whether or not to open the quickfix window when the spec fails.
+        open_quickfix_when_spec_failed = true,
+      }
+    end
   },
 
   -- プレナリー（多くのプラグインの依存関係）
@@ -71,7 +101,6 @@ require("lazy").setup({
   { import = "plugins.neo-tree" },    -- ファイルエクスプローラー
   { import = "plugins.telescope" },   -- ファジーファインダー
   { import = "plugins.cmp" },         -- 補完エンジン
-  { import = "plugins.copilot" },     -- GitHub Copilot
   { import = "plugins.autopairs" },   -- 自動括弧閉じ
   { import = "plugins.surround" },    -- サラウンド操作
   { import = "plugins.whichkey" },    -- キーバインドヘルパー
@@ -80,14 +109,11 @@ require("lazy").setup({
   { import = "plugins.treesitter" },  -- 構文解析
   { import = "plugins.conform" },     -- フォーマッター
   { import = "plugins.lint" },        -- リンター
-  { import = "plugins.gitsigns" },    -- Git統合
   { import = "plugins.fugitive" },    -- Git操作
-  { import = "plugins.diffview" },    -- Git差分表示
   { import = "plugins.toggleterm" },  -- ターミナル
   { import = "plugins.persistence" }, -- セッション管理
   { import = "plugins.spectre" },     -- 検索/置換強化
   { import = "plugins.mini" },        -- Mini.nvimプラグイン
-  { import = "plugins.leap" },        -- 移動強化
   { import = "plugins.flash" },       -- 移動強化
   { import = "plugins.harpoon" },     -- ファイルナビゲーション
 

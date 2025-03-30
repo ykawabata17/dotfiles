@@ -203,16 +203,6 @@ return {
         -- CSS
         cssls = {},
 
-        -- JSON
-        jsonls = {
-          settings = {
-            json = {
-              schemas = require("schemastore").json.schemas(),
-              validate = { enable = true },
-            },
-          },
-        },
-
         -- YAML
         yamlls = {
           settings = {
