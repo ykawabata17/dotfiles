@@ -28,6 +28,24 @@ require("lazy").setup({
     end,
   },
 
+  {
+    'numToStr/Comment.nvim',
+    lazy = false,
+    config = function()
+      require('Comment').setup(
+        vim.keymap.set("n", "<C-/>", function()
+          require("Comment.api").toggle.linewise.current()
+        end, { desc = "Toggle comment" }),
+
+        vim.keymap.set("x", "<C-/>", function()
+          local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+          vim.api.nvim_feedkeys(esc, "nx", false)
+          require("Comment.api").toggle.linewise(vim.fn.visualmode())
+        end, { desc = "Toggle comment for selection" })
+      )
+    end,
+  },
+
   { 'echasnovski/mini.icons',      version = false },
 
   -- JSON Schema Store
@@ -55,7 +73,6 @@ require("lazy").setup({
   { import = "plugins.cmp" },         -- 補完エンジン
   { import = "plugins.copilot" },     -- GitHub Copilot
   { import = "plugins.autopairs" },   -- 自動括弧閉じ
-  { import = "plugins.comment" },     -- コメントトグル
   { import = "plugins.surround" },    -- サラウンド操作
   { import = "plugins.whichkey" },    -- キーバインドヘルパー
   { import = "plugins.mason" },       -- LSPインストーラー
