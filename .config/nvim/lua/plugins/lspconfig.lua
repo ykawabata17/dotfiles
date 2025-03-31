@@ -19,6 +19,7 @@ return {
           "clangd",     -- C/C++
           "eslint",
           "tailwindcss",
+          "gopls",
         },
         automatic_installation = true,
       })
