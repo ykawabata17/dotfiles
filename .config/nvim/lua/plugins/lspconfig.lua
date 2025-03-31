@@ -37,59 +37,7 @@ return {
     },
     config = function()
       -- Neodev (Neovim Lua API開発用)
-      require("neodev").setup({
-        library = {
-          plugins = { "nvim-dap-ui" },
-          types = true,
-        },
-      })
-
-      -- LSPの診断表示設定
-      vim.diagnostic.config({
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = "if_many",
-          prefix = "●",
-        },
-        severity_sort = true,
-        float = {
-          border = "rounded",
-          source = true,
-        },
-      })
-
-      -- LSPのUI設定
-      local lsp_defaults = {
-        float = {
-          focusable = true,
-          style = "minimal",
-          border = "rounded",
-        },
-        diagnostic = {
-          virtual_text = { spacing = 4, prefix = "●" },
-          underline = true,
-          update_in_insert = false,
-          severity_sort = true,
-          float = {
-            focusable = true,
-            style = "minimal",
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = "",
-          },
-        },
-      }
-
-      -- デフォルト設定を適用
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover, lsp_defaults.float
-      )
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help, lsp_defaults.float
-      )
+      require("neodev").setup()
 
       -- LSPの機能をキーマップに設定
       local function on_attach(client, bufnr)
@@ -115,31 +63,6 @@ return {
         if client.server_capabilities.inlayHintProvider then
           vim.lsp.inlay_hint.enable = true
         end
-
-        -- ドキュメントハイライト
-        if client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-          vim.api.nvim_create_autocmd("CursorHold", {
-            group = "lsp_document_highlight",
-            buffer = bufnr,
-            callback = vim.lsp.buf.document_highlight,
-          })
-          vim.api.nvim_create_autocmd("CursorMoved", {
-            group = "lsp_document_highlight",
-            buffer = bufnr,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
-
-        -- コードレンズ
-        if client.server_capabilities.codeLensProvider then
-          vim.api.nvim_create_augroup("lsp_codelens", { clear = true })
-          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            group = "lsp_codelens",
-            buffer = bufnr,
-            callback = vim.lsp.codelens.refresh,
-          })
-        end
       end
 
       -- LSPサーバーの設定
@@ -162,46 +85,9 @@ return {
                 },
               },
               telemetry = { enable = false },
-              completion = {
-                callSnippet = "Replace",
-              },
             },
           },
         },
-
-        -- TypeScript/JavaScript
-        tsserver = {
-          settings = {
-            typescript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-            javascript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-          },
-        },
-
-        -- HTML
-        html = {},
-
-        -- CSS
-        cssls = {},
 
         -- YAML
         yamlls = {
@@ -215,12 +101,6 @@ return {
           },
         },
 
-        -- Ruby
-        solargraph = {},
-
-        -- C/C++
-        clangd = {},
-
         -- ESLint
         eslint = {
           settings = {
@@ -228,9 +108,6 @@ return {
             autoFixOnSave = true,
           },
         },
-
-        -- Tailwind CSS
-        tailwindcss = {},
       }
 
       -- Mason-lspconfigを使用してLSPサーバーを設定

@@ -7,6 +7,3 @@ require('plugins')
 
 -- LSP設定
 require('lsp')
-
--- UI設定
-require('ui')

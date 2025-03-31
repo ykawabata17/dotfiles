@@ -37,10 +37,6 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
-      window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      },
       formatting = {
         format = lspkind.cmp_format({
           mode = "symbol_text",
@@ -88,9 +84,6 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources(sources),
-      experimental = {
-        ghost_text = true,
-      },
     })
 
     -- コマンドライン用の設定
