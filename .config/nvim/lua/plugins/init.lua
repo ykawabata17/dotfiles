@@ -99,6 +99,7 @@ require("lazy").setup({
   { import = "plugins.notify" },      -- 通知
   { import = "plugins.hlchunk" },     -- インデント表示
   { import = "plugins.neo-tree" },    -- ファイルエクスプローラー
+  { import = "plugins.neotest" },     -- rspec のテスト実行
   { import = "plugins.telescope" },   -- ファジーファインダー
   { import = "plugins.cmp" },         -- 補完エンジン
   { import = "plugins.autopairs" },   -- 自動括弧閉じ

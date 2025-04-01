@@ -54,6 +54,15 @@ keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)         -- 前の
 keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)         -- 次の診断へ
 keymap("n", "<leader>d", ":lua vim.diagnostic.open_float()<CR>", opts) -- 診断を表示
 
+-- neotest
+keymap("n", "<leader>nr", "<Cmd>lua require('neotest').run.run()<CR>", { desc = "Run the nearest test" })
+keymap("n", "<leader>nf", "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
+  { desc = "Run the tests of current file" })
+keymap("n", "<leader>nR", "<Cmd>lua require('neotest').run.run(vim.fn.getcwd())<CR>", { desc = "Run all tests" })
+keymap("n", "<leader>nS", "<Cmd>lua require('neotest').stop()<CR>", { desc = "Stop the tests" })
+keymap("n", "<leader>no", "<Cmd>lua require('neotest').output.open({ enter = true })<CR>", { desc = "Open output" })
+keymap("n", "<leader>ns", "<Cmd>lua require('neotest').summary.toggle()<CR>", { desc = "Open summary" })
+
 -- その他の便利なキーマップ
 keymap("n", "<leader>w", ":w<CR>", opts)   -- 保存
 keymap("n", "<leader>q", ":q<CR>", opts)   -- 終了
