@@ -90,6 +90,14 @@ require("lazy").setup({
     lazy = true,
   },
 
+  -- LazyGit インターフェース
+  {
+    "kdheepak/lazygit.nvim",
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
+  },
+
   -- 個別のプラグイン設定ファイルをインポート
   { import = "plugins.catppuccin" },  -- カラーテーマ
   { import = "plugins.alpha" },       -- スタート画面
@@ -109,7 +117,6 @@ require("lazy").setup({
   { import = "plugins.lspconfig" },   -- LSP設定
   { import = "plugins.treesitter" },  -- 構文解析
   { import = "plugins.conform" },     -- フォーマッター
-  { import = "plugins.fugitive" },    -- Git操作
   { import = "plugins.toggleterm" },  -- ターミナル
   { import = "plugins.persistence" }, -- セッション管理
   { import = "plugins.spectre" },     -- 検索/置換強化
