@@ -68,3 +68,17 @@ keymap("n", "<leader>w", ":w<CR>", opts)   -- 保存
 keymap("n", "<leader>q", ":q<CR>", opts)   -- 終了
 keymap("n", "<leader>wq", ":wq<CR>", opts) -- 保存して終了
 keymap("n", "<leader>wa", ":wa<CR>", opts) -- すべて保存
+
+-- ファイルパスのコピー
+-- 相対パス
+keymap("n", "<leader>cp", function()
+  local path = vim.fn.expand("%")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied relative path: " .. path)
+end, { desc = "Copy Relative Path" })
+-- 絶対パス
+keymap("n", "<leader>cP", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied absolute path: " .. path)
+end, { desc = "Copy Absolute Path" })
