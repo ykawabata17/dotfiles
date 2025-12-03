@@ -15,8 +15,8 @@ return {
           "cssls",
           "jsonls",
           "yamlls",
-          "solargraph", -- Ruby
-          "clangd",     -- C/C++
+          "ruby_lsp", -- Shopify製
+          "clangd",   -- C/C++
           "eslint",
           "tailwindcss",
           "gopls",
@@ -107,6 +107,14 @@ return {
           settings = {
             packageManager = "npm",
             autoFixOnSave = true,
+          },
+        },
+
+        -- Ruby (ruby_lsp)
+        ruby_lsp = {
+          init_options = {
+            formatter = "auto",
+            linters = { "rubocop" },
           },
         },
       }
