@@ -1,9 +1,9 @@
--- 基本設定の読み込み
-require('core.options')
-require('core.keymaps')
+-- Neovim 設定エントリーポイント
 
--- プラグイン管理
-require('plugins')
+-- コア設定の読み込み
+require("core.options")     -- 基本オプション
+require("core.keymaps")     -- キーマッピング
+require("core.diagnostics").setup() -- 診断設定
 
--- LSP設定
-require('lsp')
+-- プラグイン管理（lazy.nvim）
+require("plugins")
