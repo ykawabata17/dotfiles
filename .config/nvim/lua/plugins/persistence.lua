@@ -9,8 +9,8 @@ return {
     pre_save = nil,
   },
   keys = {
-    { "<leader>ss", function() require("persistence").load() end,                desc = "Load Session" },
-    { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "Load Last Session" },
-    { "<leader>sd", function() require("persistence").stop() end,                desc = "Don't Save Current Session" },
+    { "<leader>Ss", function() require("persistence").load() end,                desc = "Load Session" },
+    { "<leader>Sl", function() require("persistence").load({ last = true }) end, desc = "Load Last Session" },
+    { "<leader>Sd", function() require("persistence").stop() end,                desc = "Don't Save Current Session" },
   },
 }

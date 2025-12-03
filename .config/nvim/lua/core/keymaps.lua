@@ -1,84 +1,159 @@
 -- キーマッピング設定
--- VSCodeライクなキーバインドを設定
+-- 論理的なグループ分けで整理
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- ノーマルモード --
+-- ============================================================================
+-- 基本操作
+-- ============================================================================
+
+-- ファイル操作
+keymap("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
+keymap("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All" })
+keymap("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
+keymap("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit All" })
+
+-- 検索ハイライト解除
+keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear Search Highlight" })
+
+-- 検索結果を中央に表示
+keymap("n", "n", "nzzzv", opts)
+keymap("n", "N", "Nzzzv", opts)
+
+-- ============================================================================
 -- ウィンドウ操作
-keymap("n", "<C-h>", "<C-w>h", opts) -- 左のウィンドウへ
-keymap("n", "<C-j>", "<C-w>j", opts) -- 下のウィンドウへ
-keymap("n", "<C-k>", "<C-w>k", opts) -- 上のウィンドウへ
-keymap("n", "<C-l>", "<C-w>l", opts) -- 右のウィンドウへ
+-- ============================================================================
 
--- バッファ操作
-keymap("n", "<S-l>", ":bnext<CR>", opts)       -- 次のバッファへ
-keymap("n", "<S-h>", ":bprevious<CR>", opts)   -- 前のバッファへ
-keymap("n", "<leader>c", ":bdelete<CR>", opts) -- バッファを閉じる (VSCodeの閉じるタブ)
+keymap("n", "<C-h>", "<C-w>h", { desc = "Move to Left Window" })
+keymap("n", "<C-j>", "<C-w>j", { desc = "Move to Below Window" })
+keymap("n", "<C-k>", "<C-w>k", { desc = "Move to Above Window" })
+keymap("n", "<C-l>", "<C-w>l", { desc = "Move to Right Window" })
 
--- インデント調整を維持
+-- ウィンドウサイズ調整
+keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+-- ============================================================================
+-- バッファ操作 (<leader>b)
+-- ============================================================================
+
+keymap("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
+keymap("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+-- <leader>bd, <leader>bD は mini.bufremove で定義
+
+-- ============================================================================
+-- インデント・移動（ビジュアルモード）
+-- ============================================================================
+
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move Lines Down" })
+keymap("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move Lines Up" })
 
--- ビジュアルモードでの複数行移動
-keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
-keymap("v", "<C-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+-- ============================================================================
+-- ファイルエクスプローラー (<leader>e)
+-- ============================================================================
 
--- 検索関連
-keymap("n", "<leader>h", ":nohlsearch<CR>", opts) -- ハイライト解除
-keymap("n", "n", "nzzzv", opts)                   -- 検索結果の次へ (中央表示)
-keymap("n", "N", "Nzzzv", opts)                   -- 検索結果の前へ (中央表示)
+keymap("n", "<C-b>", "<cmd>Neotree toggle<cr>", { desc = "Toggle File Explorer" })
+keymap("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "Focus File Explorer" })
 
--- ファイルエクスプローラー (Neo-tree)
-keymap("n", "<C-b>", ":Neotree toggle<CR>", opts)    -- サイドバートグル (VSCodeのエクスプローラー)
-keymap("n", "<leader>e", ":Neotree focus<CR>", opts) -- エクスプローラーにフォーカス
+-- ============================================================================
+-- LSP 操作 (<leader>l, g*)
+-- ============================================================================
 
--- Telescope (VSCodeのクイックオープン等)
-keymap("n", "<C-p>", ":Telescope find_files<CR>", opts)     -- ファイル検索
-keymap("n", "<C-f>", ":Telescope live_grep<CR>", opts)      -- グローバル検索
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)   -- バッファリスト
-keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts) -- ヘルプタグ
+-- 診断ナビゲーション
+keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+keymap("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
--- ターミナル
-keymap("n", "<leader>t", ":terminal<CR>", opts) -- ターミナル起動
-keymap("t", "<Esc>", "<C-\\><C-n>", opts)       -- ターミナルモード終了
+-- LSP 追加機能
+keymap("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+keymap("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format Document" })
+keymap("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
+keymap("n", "<leader>lR", "<cmd>LspRestart<cr>", { desc = "LSP Restart" })
 
--- LSP関連
-keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)           -- 定義へジャンプ
-keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)           -- 参照を検索
-keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)                 -- ホバー情報表示
-keymap("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)       -- リネーム
-keymap("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)  -- コードアクション
-keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", opts)        -- フォーマット
-keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)         -- 前の診断へ
-keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)         -- 次の診断へ
-keymap("n", "<leader>d", ":lua vim.diagnostic.open_float()<CR>", opts) -- 診断を表示
+-- ============================================================================
+-- テスト (<leader>t) - Neotest
+-- ============================================================================
 
--- neotest
-keymap("n", "<leader>nr", "<Cmd>lua require('neotest').run.run()<CR>", { desc = "Run the nearest test" })
-keymap("n", "<leader>nf", "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
-  { desc = "Run the tests of current file" })
-keymap("n", "<leader>nR", "<Cmd>lua require('neotest').run.run(vim.fn.getcwd())<CR>", { desc = "Run all tests" })
-keymap("n", "<leader>nS", "<Cmd>lua require('neotest').stop()<CR>", { desc = "Stop the tests" })
-keymap("n", "<leader>no", "<Cmd>lua require('neotest').output.open({ enter = true })<CR>", { desc = "Open output" })
-keymap("n", "<leader>ns", "<Cmd>lua require('neotest').summary.toggle()<CR>", { desc = "Open summary" })
+keymap("n", "<leader>tr", function() require("neotest").run.run() end, { desc = "Run Nearest Test" })
+keymap("n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run File Tests" })
+keymap("n", "<leader>tR", function() require("neotest").run.run(vim.fn.getcwd()) end, { desc = "Run All Tests" })
+keymap("n", "<leader>ts", function() require("neotest").run.stop() end, { desc = "Stop Tests" })
+keymap("n", "<leader>to", function() require("neotest").output.open({ enter = true }) end, { desc = "Test Output" })
+keymap("n", "<leader>tS", function() require("neotest").summary.toggle() end, { desc = "Test Summary" })
 
--- その他の便利なキーマップ
-keymap("n", "<leader>w", ":w<CR>", opts)   -- 保存
-keymap("n", "<leader>q", ":q<CR>", opts)   -- 終了
-keymap("n", "<leader>wq", ":wq<CR>", opts) -- 保存して終了
-keymap("n", "<leader>wa", ":wa<CR>", opts) -- すべて保存
+-- ============================================================================
+-- ターミナル (<leader>T)
+-- ============================================================================
+
+keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
+keymap("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Move to Left Window" })
+keymap("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Move to Below Window" })
+keymap("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Move to Above Window" })
+keymap("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Move to Right Window" })
+
+-- ============================================================================
+-- 検索・置換 (<leader>s)
+-- ============================================================================
+-- <leader>sr: Spectre (spectre.lua で定義)
+
+keymap("n", "<leader>sw", function()
+  require("spectre").open_visual({ select_word = true })
+end, { desc = "Search Current Word" })
+
+keymap("v", "<leader>sw", function()
+  require("spectre").open_visual()
+end, { desc = "Search Selection" })
+
+-- ============================================================================
+-- Rails 開発 (<leader>r)
+-- ============================================================================
+
+-- vim-rails のキーマップ
+keymap("n", "<leader>ra", "<cmd>A<cr>", { desc = "Rails: Alternate File (Test/Code)" })
+keymap("n", "<leader>rA", "<cmd>AV<cr>", { desc = "Rails: Alternate in VSplit" })
+keymap("n", "<leader>rm", "<cmd>Emodel<cr>", { desc = "Rails: Go to Model" })
+keymap("n", "<leader>rc", "<cmd>Econtroller<cr>", { desc = "Rails: Go to Controller" })
+keymap("n", "<leader>rv", "<cmd>Eview<cr>", { desc = "Rails: Go to View" })
+keymap("n", "<leader>rs", "<cmd>Espec<cr>", { desc = "Rails: Go to Spec" })
+
+-- ============================================================================
+-- コピー操作 (<leader>y)
+-- ============================================================================
 
 -- ファイルパスのコピー
--- 相対パス
-keymap("n", "<leader>cp", function()
+keymap("n", "<leader>yp", function()
   local path = vim.fn.expand("%")
   vim.fn.setreg("+", path)
-  vim.notify("Copied relative path: " .. path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, { desc = "Copy Relative Path" })
--- 絶対パス
-keymap("n", "<leader>cP", function()
+
+keymap("n", "<leader>yP", function()
   local path = vim.fn.expand("%:p")
   vim.fn.setreg("+", path)
-  vim.notify("Copied absolute path: " .. path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, { desc = "Copy Absolute Path" })
+
+keymap("n", "<leader>yf", function()
+  local filename = vim.fn.expand("%:t")
+  vim.fn.setreg("+", filename)
+  vim.notify("Copied: " .. filename, vim.log.levels.INFO)
+end, { desc = "Copy Filename" })
+
+-- ============================================================================
+-- その他
+-- ============================================================================
+
+-- which-key を手動で開く
+keymap("n", "<leader>?", "<cmd>WhichKey<cr>", { desc = "Which Key" })
+
+-- Lazy（プラグインマネージャー）
+keymap("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Plugin Manager" })
+
+-- Mason（LSP インストーラー）
+keymap("n", "<leader>M", "<cmd>Mason<cr>", { desc = "Mason LSP Installer" })

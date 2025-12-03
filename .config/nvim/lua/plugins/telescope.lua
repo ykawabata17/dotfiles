@@ -11,15 +11,16 @@ return {
   },
   cmd = "Telescope",
   keys = {
-    { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Live Grep" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Buffers" },
-    { "<leader>fh", "<cmd>Telescope help_tags<cr>",   desc = "Help Tags" },
-    { "<leader>fr", "<cmd>Telescope oldfiles<cr>",    desc = "Recent Files" },
-    { "<leader>fc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
-    { "<leader>fd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
-    { "<C-p>",      "<cmd>Telescope find_files<cr>",  desc = "Find Files (VSCode style)" },
-    { "<C-f>",      "<cmd>Telescope live_grep<cr>",   desc = "Live Grep (VSCode style)" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>",            desc = "Find Files" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>",             desc = "Live Grep" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>",               desc = "Buffers" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>",             desc = "Help Tags" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>",              desc = "Recent Files" },
+    { "<leader>fc", "<cmd>Telescope colorscheme<cr>",           desc = "Colorscheme" },
+    { "<leader>fd", "<cmd>Telescope diagnostics<cr>",           desc = "Diagnostics" },
+    { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>",  desc = "Document Symbols" },
+    { "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Workspace Symbols" },
+    -- VSCode スタイルは keymaps.lua で定義
   },
   config = function()
     local telescope = require("telescope")

@@ -61,16 +61,6 @@ require("lazy").setup({
     lazy = false,
   },
 
-  {
-    "lewis6991/gitsigns.nvim",
-    lazy = false,
-    config = function()
-      require("gitsigns").setup {
-        current_line_blame = true,
-      }
-    end,
-  },
-
   { "sindrets/diffview.nvim",      lazy = false },
 
   {
