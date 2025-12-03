@@ -107,6 +107,8 @@ require("lazy").setup({
   { import = "plugins.lspconfig" },   -- LSP設定
   { import = "plugins.treesitter" },  -- 構文解析
   { import = "plugins.conform" },     -- フォーマッター
+  { import = "plugins.lint" },        -- リンター
+  { import = "plugins.trouble" },     -- 診断リスト
   { import = "plugins.toggleterm" },  -- ターミナル
   { import = "plugins.persistence" }, -- セッション管理
   { import = "plugins.spectre" },     -- 検索/置換強化
