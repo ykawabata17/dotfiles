@@ -2,12 +2,13 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 local act = wezterm.action
 
--- フォントサイズ
-config.font_size = 13.0
+-- フォントサイ
+config.font_size = 12.0
 -- 背景の非透過率（1なら完全に透過させない）
 config.window_background_opacity = 0.9
 -- カラースキーム(https://wezterm.org/colorschemes/index.html)
-config.color_scheme = 'Solarized Dark (Gogh)'
+-- config.color_scheme = 'Solarized Dark (Gogh)'
+config.color_scheme = 'Kanagawa (Gogh)'
 -- フォント設定
 config.font = wezterm.font 'HackGen Console NF'
 
@@ -16,7 +17,7 @@ config.window_decorations = "RESIZE"
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
--- ■ 初期サイズ
+-- ■ 初期サイ
 config.initial_cols = 120
 config.initial_rows = 40
 
