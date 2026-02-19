@@ -23,6 +23,28 @@ config.initial_rows = 40
 
 -- キーバインド
 config.keys = {
+  -- Ctrl + SHIFT + O で透過設定を切り替える
+  {
+    -- キー設定: Ctrl + Shift + O
+    key = 'O',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action_callback(function(window, pane)
+      -- 現在の設定上書き（Overrides）を取得
+      local overrides = window:get_config_overrides() or {}
+
+      -- 透過率が設定されているかチェック
+      if overrides.window_background_opacity == 1.0 then
+        -- 1.0 (不透明) なら、設定を削除してデフォルト (0.9) に戻す
+        overrides.window_background_opacity = nil
+      else
+        -- それ以外 (デフォルトの0.9の状態) なら、1.0 (不透明) に設定する
+        overrides.window_background_opacity = 1.0
+      end
+
+      -- 新しい設定をウィンドウに適用
+      window:set_config_overrides(overrides)
+    end),
+  },
 
   -- ⌘ Ctrl fでフルスクリーン切り替え
   {
