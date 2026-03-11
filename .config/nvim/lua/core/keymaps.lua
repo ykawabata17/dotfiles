@@ -128,7 +128,7 @@ keymap("n", "<leader>rs", "<cmd>Espec<cr>", { desc = "Rails: Go to Spec" })
 
 -- ファイルパスのコピー
 keymap("n", "<leader>yp", function()
-  local path = vim.fn.expand("%")
+  local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, { desc = "Copy Relative Path" })
