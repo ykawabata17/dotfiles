@@ -23,6 +23,18 @@ return {
       window = {
         position = "left",
         width = 30,
+        mappings = {
+          ["<"] = function(state)
+            local node = state.tree:get_node()
+            local width = vim.api.nvim_win_get_width(0)
+            vim.api.nvim_win_set_width(0, math.max(width - 5, 20))
+          end,
+          [">"] = function(state)
+            local node = state.tree:get_node()
+            local width = vim.api.nvim_win_get_width(0)
+            vim.api.nvim_win_set_width(0, width + 5)
+          end,
+        },
       },
       filesystem = {
         filtered_items = {
