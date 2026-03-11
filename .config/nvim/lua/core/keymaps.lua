@@ -80,12 +80,24 @@ keymap("n", "<leader>lR", "<cmd>LspRestart<cr>", { desc = "LSP Restart" })
 -- テスト (<leader>t) - Neotest
 -- ============================================================================
 
-keymap("n", "<leader>tr", function() require("neotest").run.run() end, { desc = "Run Nearest Test" })
-keymap("n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run File Tests" })
-keymap("n", "<leader>tR", function() require("neotest").run.run(vim.fn.getcwd()) end, { desc = "Run All Tests" })
-keymap("n", "<leader>ts", function() require("neotest").run.stop() end, { desc = "Stop Tests" })
-keymap("n", "<leader>to", function() require("neotest").output.open({ enter = true }) end, { desc = "Test Output" })
-keymap("n", "<leader>tS", function() require("neotest").summary.toggle() end, { desc = "Test Summary" })
+keymap("n", "<leader>tr", function()
+	require("neotest").run.run()
+end, { desc = "Run Nearest Test" })
+keymap("n", "<leader>tf", function()
+	require("neotest").run.run(vim.fn.expand("%"))
+end, { desc = "Run File Tests" })
+keymap("n", "<leader>tR", function()
+	require("neotest").run.run(vim.fn.getcwd())
+end, { desc = "Run All Tests" })
+keymap("n", "<leader>ts", function()
+	require("neotest").run.stop()
+end, { desc = "Stop Tests" })
+keymap("n", "<leader>to", function()
+	require("neotest").output.open({ enter = true })
+end, { desc = "Test Output" })
+keymap("n", "<leader>tS", function()
+	require("neotest").summary.toggle()
+end, { desc = "Test Summary" })
 
 -- ============================================================================
 -- ターミナル (<leader>T)
@@ -103,11 +115,11 @@ keymap("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Move to Right Window" })
 -- <leader>sr: Spectre (spectre.lua で定義)
 
 keymap("n", "<leader>sw", function()
-  require("spectre").open_visual({ select_word = true })
+	require("spectre").open_visual({ select_word = true })
 end, { desc = "Search Current Word" })
 
 keymap("v", "<leader>sw", function()
-  require("spectre").open_visual()
+	require("spectre").open_visual()
 end, { desc = "Search Selection" })
 
 -- ============================================================================
@@ -128,21 +140,21 @@ keymap("n", "<leader>rs", "<cmd>Espec<cr>", { desc = "Rails: Go to Spec" })
 
 -- ファイルパスのコピー
 keymap("n", "<leader>yp", function()
-  local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
-  vim.fn.setreg("+", path)
-  vim.notify("Copied: " .. path, vim.log.levels.INFO)
+	local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
+	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, { desc = "Copy Relative Path" })
 
 keymap("n", "<leader>yP", function()
-  local path = vim.fn.expand("%:p")
-  vim.fn.setreg("+", path)
-  vim.notify("Copied: " .. path, vim.log.levels.INFO)
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, { desc = "Copy Absolute Path" })
 
 keymap("n", "<leader>yf", function()
-  local filename = vim.fn.expand("%:t")
-  vim.fn.setreg("+", filename)
-  vim.notify("Copied: " .. filename, vim.log.levels.INFO)
+	local filename = vim.fn.expand("%:t")
+	vim.fn.setreg("+", filename)
+	vim.notify("Copied: " .. filename, vim.log.levels.INFO)
 end, { desc = "Copy Filename" })
 
 -- ============================================================================
