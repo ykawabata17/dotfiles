@@ -1,0 +1,15 @@
+# ~/.config/sheldon/plugins.toml
+
+shell = "zsh"
+
+# 入力補完 (履歴から薄い文字で候補を出してくれます)
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+# コマンドのハイライト (正しいコマンドは緑、間違っていると赤になります)
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+
+# 補完機能の強化
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
