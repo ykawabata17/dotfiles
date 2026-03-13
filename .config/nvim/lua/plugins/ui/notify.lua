@@ -1,27 +1,16 @@
--- 通知プラグインの設定
+-- nvim-notify: 通知表示（noice.nvim から利用）
 
 return {
 	"rcarriga/nvim-notify",
-	config = function()
-		---@diagnostic disable-next-line: missing-fields
-		require("notify").setup({
-			background_colour = "#000000",
-			fps = 60,
-			icons = {
-				DEBUG = "!",
-				ERROR = " ",
-				INFO = " ",
-				TRACE = "✎",
-				WARN = " ",
-			},
-			level = 2,
-			minimum_width = 50,
-			render = "default",
-			stages = "fade_in_slide_out",
-			timeout = 3000,
-			top_down = true,
-		})
-
-		vim.notify = require("notify")
-	end,
+	opts = {
+		timeout = 3000,
+		max_height = function()
+			return math.floor(vim.o.lines * 0.75)
+		end,
+		max_width = function()
+			return math.floor(vim.o.columns * 0.75)
+		end,
+		render = "minimal",
+		stages = "fade_in_slide_out",
+	},
 }

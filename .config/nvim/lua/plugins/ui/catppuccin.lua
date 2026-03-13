@@ -20,6 +20,7 @@ return {
 				telescope = true,
 				treesitter = true,
 				notify = true,
+				noice = true,
 				neotree = true,
 				which_key = true,
 			},
