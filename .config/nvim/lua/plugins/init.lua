@@ -67,6 +67,7 @@ require("lazy").setup({
 	-- ============================================================================
 	{ "tpope/vim-rails", ft = { "ruby", "eruby" } },
 	{ "slim-template/vim-slim", ft = "slim" },
+	{ "tpope/vim-endwise", ft = { "ruby", "eruby", "lua" } },
 	{
 		"mogulla3/rspec.nvim",
 		ft = "ruby",
