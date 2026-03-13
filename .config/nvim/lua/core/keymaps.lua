@@ -112,15 +112,7 @@ keymap("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Move to Right Window" })
 -- ============================================================================
 -- 検索・置換 (<leader>s)
 -- ============================================================================
--- <leader>sr: Spectre (spectre.lua で定義)
-
-keymap("n", "<leader>sw", function()
-	require("spectre").open_visual({ select_word = true })
-end, { desc = "Search Current Word" })
-
-keymap("v", "<leader>sw", function()
-	require("spectre").open_visual()
-end, { desc = "Search Selection" })
+-- <leader>sr, <leader>sw: grug-far.lua で定義
 
 -- ============================================================================
 -- Rails 開発 (<leader>r)
