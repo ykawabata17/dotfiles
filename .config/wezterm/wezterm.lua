@@ -18,7 +18,8 @@ config.font = wezterm.font_with_fallback({
 -- タイトルバーを非表示にする
 config.window_decorations = "RESIZE"
 config.use_fancy_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
+-- ステータスバー表示のため常にタブバーを表示
+config.hide_tab_bar_if_only_one_tab = false
 
 -- ■ 初期サイ
 config.initial_cols = 120
@@ -140,6 +141,53 @@ config.keys = {
     action = act.QuickSelect,
   },
 
+  -- ■ Workspace 管理
+  -- Cmd + Shift + W でワークスペース一覧を表示
+  {
+    key = 'W',
+    mods = 'CMD|SHIFT',
+    action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
+  },
+  -- Cmd + Shift + N で新しいワークスペースを作成
+  {
+    key = 'N',
+    mods = 'CMD|SHIFT',
+    action = act.PromptInputLine {
+      description = wezterm.format({
+        { Foreground = { Color = '#cba6f7' } },
+        { Text = 'Enter name for new workspace:' },
+      }),
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:perform_action(
+            act.SwitchToWorkspace { name = line },
+            pane
+          )
+        end
+      end),
+    },
+  },
 }
+
+-- ステータスバー: 現在のワークスペース名とディレクトリを表示
+wezterm.on('update-right-status', function(window, pane)
+  local workspace = window:active_workspace()
+  local cwd = ''
+  local cwd_uri = pane:get_current_working_dir()
+  if cwd_uri then
+    local file_path = cwd_uri.file_path
+    local home = os.getenv('HOME')
+    if home and file_path then
+      cwd = file_path:gsub('^' .. home, '~')
+    end
+  end
+
+  window:set_right_status(wezterm.format({
+    { Foreground = { Color = '#7f849c' } },
+    { Text = ' ' .. cwd .. '  ' },
+    { Foreground = { Color = '#cba6f7' } },
+    { Text = '  ' .. workspace .. ' ' },
+  }))
+end)
 
 return config
