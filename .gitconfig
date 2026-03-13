@@ -1,11 +1,7 @@
-[user]
-	email = yuya.kawabata@techouse.jp
-	name = Yuya Kawabata
-	signingkey = /Users/kawabatayuya/.ssh/id_rsa.pub
-[gpg]
-	format = ssh
-[commit]
-	gpgsign = true
+# [user] セクションは .gitconfig.local に記載（git 管理外）
+# email, name, signingkey を設定してください
+[include]
+	path = ~/.gitconfig.local
 
 [pager]
     diff = delta

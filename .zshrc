@@ -19,10 +19,7 @@ plugins=(git)
 
 # ---------------------------------
 # aliasを設定する
-alias cd-chr='cd ~/project/chr/CHRecruit'
-alias cd-crj='cd ~/project/chr/CRJobMediaScraper'
-alias cd-jd='cd ~/JH/driver'
-alias cd-jda='cd ~/JH/driver_app'
+# プロジェクト固有の alias は .zshrc.local に記載
 alias cl='clear'
 alias v='nvim'
 alias g='git'
@@ -83,16 +80,17 @@ alias cat='bat'
 
 
 
-alias claude="/Users/kawabatayuya/.claude/local/claude"
+# Claude Code
+alias claude="$HOME/.claude/local/claude"
 
 # bun completions
-[ -s "/Users/kawabatayuya/.bun/_bun" ] && source "/Users/kawabatayuya/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias claude-mem='/Users/kawabatayuya/.bun/bin/bun "/Users/kawabatayuya/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+alias claude-mem="$HOME/.bun/bin/bun $HOME/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"
 
 # Homebrew一括アップデート関数
 brewup() {

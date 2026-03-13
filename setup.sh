@@ -48,21 +48,34 @@ create_symlink "$DOTFILES_DIR/.config/wezterm" "$HOME/.config/wezterm"
 create_symlink "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
 create_symlink "$DOTFILES_DIR/.config/sheldon" "$HOME/.config/sheldon"
 
-# --- シークレット用ファイル ---
+# --- シークレット・個人設定用ファイル ---
 if [ ! -f "$HOME/.zshrc.local" ]; then
   echo ">>> Creating ~/.zshrc.local for secrets..."
   cat > "$HOME/.zshrc.local" << 'SECRETS'
 # このファイルは git 管理されません
-# API キーや秘密の環境変数をここに書いてください
-
-# export GEMINI_API_KEY="your-key-here"
-# export BUNDLE_ENTERPRISE__CONTRIBSYS__COM="your-token-here"
+# API キー・秘密の環境変数・プロジェクト固有 alias をここに書いてください
 SECRETS
-  echo "  Created: ~/.zshrc.local (add your secrets here)"
+  echo "  Created: ~/.zshrc.local"
+fi
+
+if [ ! -f "$HOME/.gitconfig.local" ]; then
+  echo ">>> Creating ~/.gitconfig.local for git identity..."
+  cat > "$HOME/.gitconfig.local" << 'GITLOCAL'
+[user]
+	email = your-email@example.com
+	name = Your Name
+	# signingkey = ~/.ssh/id_rsa.pub
+# [gpg]
+# 	format = ssh
+# [commit]
+# 	gpgsign = true
+GITLOCAL
+  echo "  Created: ~/.gitconfig.local (set your git identity here)"
 fi
 
 echo ""
 echo "=== Setup Complete! ==="
 echo "Next steps:"
-echo "  1. Edit ~/.zshrc.local to add your secret keys"
-echo "  2. Restart your terminal"
+echo "  1. Edit ~/.gitconfig.local to set your git identity"
+echo "  2. Edit ~/.zshrc.local to add your secret keys"
+echo "  3. Restart your terminal"
