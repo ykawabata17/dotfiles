@@ -6,11 +6,14 @@ local act = wezterm.action
 config.font_size = 12.0
 -- 背景の非透過率（1なら完全に透過させない）
 config.window_background_opacity = 0.9
--- カラースキーム(https://wezterm.org/colorschemes/index.html)
--- config.color_scheme = 'Solarized Dark (Gogh)'
-config.color_scheme = 'Kanagawa (Gogh)'
--- フォント設定
-config.font = wezterm.font 'HackGen Console NF'
+-- カラースキーム（Neovim と統一）
+config.color_scheme = 'Catppuccin Mocha'
+-- フォント設定（フォールバック付き）
+config.font = wezterm.font_with_fallback({
+  'HackGen Console NF',
+  'JetBrains Mono',
+  'Menlo',
+})
 
 -- タイトルバーを非表示にする
 config.window_decorations = "RESIZE"
